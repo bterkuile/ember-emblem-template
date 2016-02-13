@@ -3,7 +3,9 @@ module Ember
     module Rails
       class Engine < ::Rails::Engine
         initializer "ember_rails.setup", after: :append_assets_path, group: :all do |app|
-          app.assets.register_engine '.emblem', Ember::Emblem::Template, mime_type: 'application/javascript'
+          app.config.assets.configure do |env|
+            env.register_engine '.emblem', Ember::Emblem::Template, mime_type: 'application/javascript'
+          end
         end
       end
     end
